@@ -7,4 +7,5 @@ public class TxSigningResponse {
 
     private String signedTxHex;
 
+    private String txHash;
 }

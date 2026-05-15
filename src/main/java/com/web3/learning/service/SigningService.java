@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import static com.web3.learning.constants.Constants.ETH_MULTIPLIER;
+import static com.web3.learning.utils.KeccakHashUtils.bytesToHex;
+import static com.web3.learning.utils.KeccakHashUtils.keccak256;
 
 @Log4j2
 @Service
@@ -49,6 +51,7 @@ public class SigningService {
 
         TxSigningResponse txSigningResponse = new TxSigningResponse();
         txSigningResponse.setSignedTxHex(Numeric.toHexString(signedTxBytes));
+        txSigningResponse.setTxHash(keccak256(signedTxBytes));
 
         return txSigningResponse;
     }
