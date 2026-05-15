@@ -3,9 +3,8 @@ package com.web3.learning.domain.validation;
 import com.web3.learning.domain.validation.annotations.ValidEthAddress;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.bouncycastle.jcajce.provider.digest.Keccak;
 
-import java.nio.charset.StandardCharsets;
+import static com.web3.learning.utils.KeccakHashUtils.keccak256;
 
 public class EthereumAddressValidator implements ConstraintValidator<ValidEthAddress, String> {
 
@@ -59,22 +58,6 @@ public class EthereumAddressValidator implements ConstraintValidator<ValidEthAdd
         }
 
         return true;
-    }
-
-    private String keccak256(String value) {
-        Keccak.Digest256 digest256 = new Keccak.Digest256();
-        byte[] hashBytes = digest256.digest(value.getBytes(StandardCharsets.UTF_8));
-        return bytesToHex(hashBytes);
-    }
-
-    private String bytesToHex(byte[] input) {
-        StringBuilder sb = new StringBuilder();
-
-        for(byte b: input) {
-            sb.append(String.format("%02x", b));
-        }
-
-        return sb.toString();
     }
 
 }

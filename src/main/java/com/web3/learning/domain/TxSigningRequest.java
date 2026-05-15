@@ -1,5 +1,6 @@
 package com.web3.learning.domain;
 
+import com.web3.learning.domain.validation.annotations.ValidEthAddress;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -11,6 +12,7 @@ public class TxSigningRequest {
     private Long chainId;
 
     @NonNull
+    @ValidEthAddress
     private String destinationAddress;
 
     @NonNull

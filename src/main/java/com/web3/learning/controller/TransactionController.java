@@ -4,6 +4,7 @@ package com.web3.learning.controller;
 import com.web3.learning.domain.TxSigningRequest;
 import com.web3.learning.domain.TxSigningResponse;
 import com.web3.learning.service.SigningService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class TransactionController {
     private final SigningService signingService;
 
     @PostMapping("/sign")
-    public TxSigningResponse signTransaction(@RequestBody TxSigningRequest txSigningRequest) throws IOException {
+    public TxSigningResponse signTransaction(@Valid @RequestBody TxSigningRequest txSigningRequest) throws IOException {
         log.info("Transaction Signing Request :: {}", txSigningRequest);
         return signingService.sign(txSigningRequest);
     }
