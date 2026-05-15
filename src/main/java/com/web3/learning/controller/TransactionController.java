@@ -8,6 +8,7 @@ import com.web3.learning.service.SigningService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,7 @@ public class TransactionController {
     private final SigningService signingService;
 
     @PostMapping("/sign")
-    public ApiResponse<TxSigningResponse> signTransaction(@Valid @RequestBody TxSigningRequest txSigningRequest) throws IOException {
-        log.info("Transaction Signing Request :: {}", txSigningRequest);
-        return signingService.sign(txSigningRequest);
+    public ResponseEntity<ApiResponse<TxSigningResponse>> signTransaction(@Valid @RequestBody TxSigningRequest txSigningRequest) throws IOException {
+        return ResponseEntity.ok(signingService.sign(txSigningRequest));
     }
 }

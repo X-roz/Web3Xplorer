@@ -30,7 +30,7 @@ public class SigningService {
     private final Web3jConfig web3jConfig;
 
     public ApiResponse<TxSigningResponse> sign(TxSigningRequest request) throws IOException {
-
+        log.info("service = sign, status = started processing Signing Request :: {}", request);
         try {
             BigDecimal requestAmount = new BigDecimal(String.valueOf(request.getAmount()));
             BigInteger value = requestAmount.multiply(ETH_MULTIPLIER).toBigInteger();
@@ -55,6 +55,7 @@ public class SigningService {
             txSigningResponse.setSignedTxHex(Numeric.toHexString(signedTxBytes));
             txSigningResponse.setTxHash(keccak256(signedTxBytes));
 
+            log.info("service = sign, status = Signing completed Successfully - {}", request);
             return ApiResponse.success(txSigningResponse, "Transaction Signed Successfully");
         } catch (Exception e) {
             throw new Web3XplorerException("Signing Error", e.getMessage());
