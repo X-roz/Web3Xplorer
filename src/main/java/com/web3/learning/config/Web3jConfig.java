@@ -10,6 +10,8 @@ import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
 
+import java.util.List;
+
 @Configuration
 public class Web3jConfig {
 
@@ -18,6 +20,10 @@ public class Web3jConfig {
 
     @Value("${privateKey}")
     private String privateKey;
+
+    @Value("${supported-chainIds}")
+    @Getter
+    private List<Long> supportedChainIds = List.of();
 
     @Getter
     private Credentials credentials;
