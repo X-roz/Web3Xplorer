@@ -3,6 +3,7 @@ package com.web3.learning.controller;
 
 import com.web3.learning.domain.TxSigningRequest;
 import com.web3.learning.domain.TxSigningResponse;
+import com.web3.learning.domain.api.ApiResponse;
 import com.web3.learning.service.SigningService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class TransactionController {
     private final SigningService signingService;
 
     @PostMapping("/sign")
-    public TxSigningResponse signTransaction(@Valid @RequestBody TxSigningRequest txSigningRequest) throws IOException {
+    public ApiResponse<TxSigningResponse> signTransaction(@Valid @RequestBody TxSigningRequest txSigningRequest) throws IOException {
         log.info("Transaction Signing Request :: {}", txSigningRequest);
         return signingService.sign(txSigningRequest);
     }
