@@ -5,9 +5,12 @@ import com.web3.learning.config.Web3Connectors;
 import com.web3.learning.exception.Web3XplorerException;
 import lombok.extern.slf4j.Slf4j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.Transaction;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 public class Web3CallerUtils {
@@ -29,6 +32,20 @@ public class Web3CallerUtils {
     public static String broadcastTransaction(Long chainId, String signedTxHash) {
         return caller(chainId, "broadcastTransaction",
                 wc -> wc.ethSendRawTransaction(signedTxHash).send().getTransactionHash());
+    }
+
+    public static Optional<Transaction> getTransaction(Long chainId, String txHash) {
+        return caller(chainId, "getTransaction",
+                wc -> wc.ethGetTransactionByHash(txHash).send().getTransaction());
+    }
+
+    public static Optional<TransactionReceipt> getTransactionReceipt(Long chainId, String txHash) {
+        return caller(chainId, "getTransactionReceipt",
+                wc -> wc.ethGetTransactionReceipt(txHash).send().getTransactionReceipt());
+    }
+
+    public static BigInteger getLatestBlock(Long chainId) {
+        return caller(chainId, "getLatestBlock", wc -> wc.ethBlockNumber().send().getBlockNumber());
     }
 
     private static  <T> T caller(Long chainId, String methodName, Web3JAction<T> action) {
