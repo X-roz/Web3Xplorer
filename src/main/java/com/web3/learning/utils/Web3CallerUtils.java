@@ -18,11 +18,17 @@ public class Web3CallerUtils {
     }
 
     public static BigInteger getMaxPriorityFeePerGas(Long chainId) {
-        return caller(chainId, "getMaxPriorityFeePerGas", wc -> wc.ethMaxPriorityFeePerGas().send().getMaxPriorityFeePerGas());
+        return caller(chainId, "getMaxPriorityFeePerGas",
+                wc -> wc.ethMaxPriorityFeePerGas().send().getMaxPriorityFeePerGas());
     }
 
     public static BigInteger getBaseFee(Long chainId) {
         return caller(chainId, "getBaseFee", wc -> wc.ethBaseFee().send().getBaseFee());
+    }
+
+    public static String broadcastTransaction(Long chainId, String signedTxHash) {
+        return caller(chainId, "broadcastTransaction",
+                wc -> wc.ethSendRawTransaction(signedTxHash).send().getTransactionHash());
     }
 
     private static  <T> T caller(Long chainId, String methodName, Web3JAction<T> action) {
