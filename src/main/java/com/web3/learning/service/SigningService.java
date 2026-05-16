@@ -57,8 +57,10 @@ public class SigningService {
 
             log.info("service = sign, status = Signing completed Successfully - {}", request);
             return ApiResponse.success(txSigningResponse, "Transaction Signed Successfully");
+        } catch (Web3XplorerException e) {
+            throw e;
         } catch (Exception e) {
-            throw new Web3XplorerException("Signing Error", e.getMessage());
+            throw new Web3XplorerException("SIGNING_ERROR", e.getMessage());
         }
     }
 
@@ -71,8 +73,10 @@ public class SigningService {
             broadCastResponse.setStatus("PUBLISHED");
             log.info("service = broadcast, Transaction published :: {}", broadCastResponse);
             return ApiResponse.success(broadCastResponse, "Transaction broadcasted Successfully");
+        } catch (Web3XplorerException e) {
+            throw e;
         } catch (Exception e) {
-            throw new Web3XplorerException("BROADCAST_FAILED",e.getMessage());
+            throw new Web3XplorerException("BROADCAST_FAILED", e.getMessage());
         }
     }
 
@@ -110,6 +114,8 @@ public class SigningService {
             }
             log.info("service = transactionEnquiry,  Transaction Enquired :: {}", txEnquiryResponse);
             return ApiResponse.success(txEnquiryResponse, "TX Enquiry Successful");
+        } catch (Web3XplorerException e) {
+            throw e;
         } catch (Exception e) {
             throw new Web3XplorerException("TX_ENQUIRY_FAILED", e.getMessage());
         }
