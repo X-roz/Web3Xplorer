@@ -1,4 +1,4 @@
-package com.web3.learning.domain.validation;
+package com.web3.learning.domain;
 
 import lombok.Data;
 

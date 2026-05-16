@@ -3,7 +3,7 @@ package com.web3.learning.service;
 import com.web3.learning.config.CredentialsConfig;
 import com.web3.learning.domain.*;
 import com.web3.learning.domain.api.ApiResponse;
-import com.web3.learning.domain.validation.BroadCastResponse;
+import com.web3.learning.domain.BroadCastResponse;
 import com.web3.learning.exception.Web3XplorerException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

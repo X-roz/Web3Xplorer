@@ -3,8 +3,7 @@ package com.web3.learning.controller;
 
 import com.web3.learning.domain.*;
 import com.web3.learning.domain.api.ApiResponse;
-import com.web3.learning.domain.validation.BroadCastResponse;
-import com.web3.learning.domain.validation.annotations.ValidTxHash;
+import com.web3.learning.domain.BroadCastResponse;
 import com.web3.learning.service.SigningService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +31,7 @@ public class TransactionController {
         return ResponseEntity.ok(signingService.broadcast(broadcastRequest));
     }
 
-    @PostMapping("/{txHash}")
+    @GetMapping("/")
     public ResponseEntity<ApiResponse<TxEnquiryResponse>> transactionStatus(@Valid @RequestBody TxEnquiryRequest txEnquiryRequest) throws IOException {
         return ResponseEntity.ok(signingService.transactionEnquiry(txEnquiryRequest));
     }
