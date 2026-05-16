@@ -3,30 +3,19 @@ package com.web3.learning.config;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 import org.web3j.crypto.Credentials;
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.http.HttpService;
 
-import java.util.List;
-
-@Configuration
-public class Web3jConfig {
-
-    @Value("${ethereum.rpc-url}")
-    private String rpcUrl;
+@Component
+public class CredentialsConfig {
 
     @Value("${privateKey}")
     private String privateKey;
 
-    @Value("${supported-chainIds}")
-    @Getter
-    private List<Long> supportedChainIds = List.of();
-
     @Getter
     private Credentials credentials;
+
     @Getter
     private String walletAddress;
 
@@ -34,12 +23,6 @@ public class Web3jConfig {
     private void init() {
         credentials = setCredentials();
         walletAddress = credentials.getAddress();
-    }
-
-    @Bean
-    @Primary
-    public Web3j web3j() {
-        return Web3j.build(new HttpService(rpcUrl));
     }
 
     private Credentials setCredentials() {
